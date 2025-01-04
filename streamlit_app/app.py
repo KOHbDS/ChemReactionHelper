@@ -42,8 +42,7 @@ if coefficients_task:
         })
     reaction.update({'coefficient' : coefficient_result})
 
-if reagents:
-    st.write('Ответ')
+if st.button('Submit', type="primary") and complition_task + coefficients_task:
     reagents_str = ' + '.join(
         [
             reaction['coefficient'][reag] + reag \
@@ -59,3 +58,5 @@ if reagents:
             ]
         )
     st.write(f'{reagents_str} = {products_str}'.replace('1', ''))
+else:
+    st.write('выберете задачу и введите реакцию, пожалуйста!')
