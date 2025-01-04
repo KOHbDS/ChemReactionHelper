@@ -8,12 +8,15 @@ api_router = APIRouter()
 async def predict(data: ModelInput):
     try:
         output = await llm_model_predict(data)
-        return ModelOutput(model_output=output, status='ok')
+        return ModelOutput(
+            reagents=data.reagents, 
+            products=output
+            status='ok'
+            )
     except:
         raise HTTPException(
             status_code=500, 
             detail=str(\
 f'Ошибка вводимых данных {data.model_input}. \
 Проверьте формат и правильность вводимых данных.'
-            ))
-
+))
