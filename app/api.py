@@ -12,6 +12,8 @@ async def predict(data: ModelInput):
     except:
         raise HTTPException(
             status_code=500, 
-            detail=str(
-                f'Ошибка вводимых данных {data.model_input}. Проверьте формат и правильность вводимых данных.'))
+            detail=str(\
+f'Ошибка вводимых данных {data.model_input}. \
+Проверьте формат и правильность вводимых данных.'
+            ))
 
