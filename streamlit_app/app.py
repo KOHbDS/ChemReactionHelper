@@ -20,8 +20,8 @@ products = right.text_input('Продукты')
 coefficient = None
 
 reaction = {
-        'reagents': preprocessing_complition(reagents), 
-        'products': preprocessing_complition(products),
+        'reagents': reagents.split(' + '), 
+        'products': products.split(' + '),
         'coefficient': coefficient,
         }
 
@@ -30,9 +30,9 @@ api_url = 'http://backend:8000/predict'
 if complition_task:
     products_result = requests.post(api_url, json={
         'task': 'complition', 
-        'reagents': reagents
+        'reagents': reaction['reagents']
         })
-    reaction.update({'products' : products_result})
+    reaction.update({'products' : products_result.json()['products']})
 
 if coefficients_task:
     coefficient_result = requests.post(api_url, json={

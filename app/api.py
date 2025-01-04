@@ -7,12 +7,12 @@ api_router = APIRouter()
 @api_router.post("/predict", response_model=ModelOutput)
 async def predict(data: ModelInput):
     try:
-        output = await llm_model_predict(data)
-        return ModelOutput(
-            reagents=data.reagents, 
-            products=output
-            status='ok'
-            )
+        products = await llm_model_predict(data)
+        return {
+            'reagents':data.reagents, 
+            'products':products,
+            'status': 'ok'
+        }
     except:
         raise HTTPException(
             status_code=500, 
